@@ -7,22 +7,18 @@
 A robust Rust crate for parsing and validating Compact Uniform Resource Identifiers (CURIEs). It provides standard syntax validation as well as specific, regex-based validation for hundreds of biological and biomedical ontologies (e.g., GO, MONDO, CHEBI) generated directly from Bioregistry.
 
 ### Features
-General Validation: Parse and validate CURIEs based on standard syntactic rules (W3C-style prefix/reference separation).
-
-Ontology-Specific Validation: precise Regex validation for over 100+ supported ontologies (including GO, CHEBI, NCIT, etc.).
-
-Auto-Generated Patterns: Validation logic is generated from upstream Bioregistry metadata, ensuring compliance with current standards.
-
-Dynamic Lookup: Instantiate validators dynamically using string prefixes (e.g., from_prefix("go")).
-
-Lightweight: Core dependencies are minimal (primarily regex).
+- **General Validation**: Parse and validate CURIEs based on standard syntactic rules (W3C-style prefix/reference separation).
+- **Ontology-Specific Validation**: precise Regex validation for over 100+ supported ontologies (including GO, CHEBI, NCIT, etc.).
+- **Auto-Generated Patterns**: Validation logic is generated from upstream Bioregistry metadata, ensuring compliance with current standards.
+- **Dynamic Lookup**: Instantiate validators dynamically using string prefixes (e.g., from_prefix("go")).
+- **Lightweight**: Core dependencies are minimal (primarily regex).
 
 ### Installation
 Add this to your Cargo.toml:
 
 ```toml
 [dependencies]
-curie_validator = "0.1.0"
+curie_validator = "0.2.0"
 ```
 ### Usage
 1. General Parsing
@@ -88,23 +84,16 @@ let input_curie = "MONDO:0012345";
 ### Supported Ontologies
 This crate includes generated validators for a wide range of biological ontologies found in the Bioregistry, including but not limited to:
 
-GO (Gene Ontology)
-
-MONDO (Mondo Disease Ontology)
-
-CHEBI (Chemical Entities of Biological Interest)
-
-NCIT (NCI Thesaurus)
-
-HP (Human Phenotype Ontology)
-
-UBERON (Uber Anatomy Ontology)
+- GO (Gene Ontology)
+- MONDO (Mondo Disease Ontology)
+- CHEBI (Chemical Entities of Biological Interest)
+- NCIT (NCI Thesaurus)
+- HP (Human Phenotype Ontology)
+- UBERON (Uber Anatomy Ontology)
 
 Note: The patterns are generated using the create.rs utility which fetches metadata from the Bioregistry API.
 
 ### Error Handling
 The parser returns a CurieParsingError enum to distinguish between structural failures and validation failures:
-
-InvalidCurie(String): The string failed the specific validation logic (e.g., Regex mismatch).
-
-UnparsableCurie(String): The string lacked the basic structure of a CURIE (e.g., missing a colon).
+- InvalidCurie(String): The string failed the specific validation logic (e.g., Regex mismatch).
+- UnparsableCurie(String): The string lacked the basic structure of a CURIE (e.g., missing a colon).
