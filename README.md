@@ -1,5 +1,5 @@
-[![Crates.io](https://img.shields.io/crates/v/securiety.svg)](https://crates.io/crates/ontology-registry)
-[![Docs.rs](https://docs.rs/securiety/badge.svg)](https://docs.rs/ontology-registry)
+[![Crates.io](https://img.shields.io/crates/v/securiety.svg)](https://crates.io/crates/securiety)
+[![Docs.rs](https://docs.rs/securiety/badge.svg)](https://docs.rs/securiety)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 [![RobisonGroup](https://img.shields.io/badge/Robinson%20Group-blue)](https://robinsongroup.github.io/)
 
