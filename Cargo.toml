@@ -1,10 +1,19 @@
 [package]
-authors = ["Rouven Reuter"]
-description = "A template for rust projects build by the robinson group"
+authors = ["Rouven Reuter <Rouven.Reuter@proton.me>"]
+description = "A crate for parsing and validating CURIE IDs"
 edition = "2024"
 homepage = "https://robinsongroup.github.io/"
 license = "MIT"
-name = "robinson-group-rust-template"
+name = "securiety"
 version = "0.1.0"
+repository = "https://github.com/SmartMonkey-git/securiety"
+keywords = ["ontology", "curie", "bioinformatics", "validation", "parsing"]
+readme = "README.md"
+license-file = "LICENSE"
 
 [dependencies]
+regex = "1.12.2"
+
+[dev-dependencies]
+mockall = "0.14.0"
+
