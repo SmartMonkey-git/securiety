@@ -18,7 +18,7 @@ Add this to your Cargo.toml:
 
 ```toml
 [dependencies]
-curie_validator = "0.2.0"
+securiety = "0.2.0"
 ```
 ### Usage
 1. General Parsing
