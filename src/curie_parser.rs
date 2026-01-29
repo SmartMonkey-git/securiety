@@ -1,28 +1,13 @@
 use crate::curie::Curie;
 use crate::error::CurieParsingError;
-use crate::traits::CurieValidator;
-use crate::validators::general_validator::GeneralCurieValidator;
+use crate::traits::{CurieParsing, CurieValidation};
 
-pub struct CurieParser<Validator: CurieValidator> {
+pub struct CurieParser<Validator: CurieValidation> {
     pub(crate) validator: Validator,
 }
 
-impl CurieParser<GeneralCurieValidator> {
-    pub fn general() -> Self {
-        CurieParser {
-            validator: GeneralCurieValidator,
-        }
-    }
-}
-
-impl<Validator: CurieValidator> CurieParser<Validator> {
-    pub fn new(validators: Validator) -> CurieParser<Validator> {
-        CurieParser {
-            validator: validators,
-        }
-    }
-
-    pub fn parse(&self, curie: &str) -> Result<Curie, CurieParsingError> {
+impl<Validator: CurieValidation> CurieParsing for CurieParser<Validator> {
+    fn parse(&self, curie: &str) -> Result<Curie, CurieParsingError> {
         match self.validator.validate(curie) {
             true => {
                 if let Some((prefix, reference)) = curie.split_once(':') {
@@ -36,6 +21,14 @@ impl<Validator: CurieValidator> CurieParser<Validator> {
     }
 }
 
+impl<Validator: CurieValidation> CurieParser<Validator> {
+    pub fn new(validators: Validator) -> CurieParser<Validator> {
+        CurieParser {
+            validator: validators,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -45,7 +38,7 @@ mod tests {
     mock! {
         pub MyValidator {}
 
-        impl CurieValidator for MyValidator {
+        impl CurieValidation for MyValidator {
             fn validate(&self, curie: &str) -> bool;
         }
     }
