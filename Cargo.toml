@@ -3,7 +3,6 @@ authors = ["Rouven Reuter <Rouven.Reuter@proton.me>"]
 description = "A crate for parsing and validating CURIE IDs"
 edition = "2024"
 homepage = "https://robinsongroup.github.io/"
-license = "MIT"
 name = "securiety"
 version = "0.2.1"
 repository = "https://github.com/SmartMonkey-git/securiety"
@@ -12,7 +11,7 @@ readme = "README.md"
 license-file = "LICENSE"
 
 [dependencies]
-regex = "1.12.2"
+regex = { version = "1.12.2", default-features = false, features = ["std", "perf", "unicode-perl"] }
 
 [dev-dependencies]
 mockall = "0.14.0"

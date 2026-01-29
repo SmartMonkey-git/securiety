@@ -1,12 +1,12 @@
 use crate::error::InvalidRegexError;
-use crate::traits::CurieValidator;
+use crate::traits::CurieValidation;
 use regex::Regex;
 
 pub struct CurieRegexValidator {
     regex: Regex,
 }
 
-impl CurieValidator for CurieRegexValidator {
+impl CurieValidation for CurieRegexValidator {
     fn validate(&self, curie: &str) -> bool {
         self.regex.is_match(curie)
     }
