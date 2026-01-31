@@ -86,8 +86,6 @@ fn test_integration_regex_validation_general() {
     assert!(!validator.validate("0000054-6")); // No colon at all
 
     // Missing Reference (Empty Reference)
-    // Note: Some specs allow "prefix:", most validators reject it.
-    // Based on your example "LOINC:", you want this rejected.
     assert!(!validator.validate("LOINC:"));
     assert!(!validator.validate("LOINC:   ")); // Empty but with whitespace
 
