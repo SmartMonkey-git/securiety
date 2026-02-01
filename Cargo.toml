@@ -12,6 +12,7 @@ license-file = "LICENSE"
 
 [dependencies]
 regex = { version = "1.12.2", default-features = false, features = ["std", "perf", "unicode-perl"] }
+paste = "1.0.15"
 
 [dev-dependencies]
 mockall = "0.14.0"
