@@ -1,5 +1,7 @@
+use std::sync::OnceLock;
 use crate::curie_parser::CurieParser;
 use crate::validators::regex_validator::CurieRegexValidator;
+use paste::paste;
 
 macro_rules! define_curie_validators {
     ( $( $fn_name:ident, $const_name:ident => $pattern:literal ),* $(,)? ) => {
@@ -7,15 +9,25 @@ macro_rules! define_curie_validators {
         $(
             pub const $const_name: &'static str = $pattern;
         )*
+        $(
+            paste! {
+                static [<$const_name _REGEX>]: OnceLock<regex::Regex> = OnceLock::new();
+            }
+        )*
 
         impl CurieRegexValidator {
             $(
-                pub fn $fn_name() -> Self {
-                    let regex = regex::Regex::new($const_name)
-                        .expect(concat!("Error compiling regex for ", stringify!($const_name)));
-                    Self::from(regex)
+                paste! {
+                    pub fn $fn_name() -> Self {
+                        let regex = [<$const_name _REGEX>].get_or_init(|| {
+                            regex::Regex::new($const_name)
+                                .expect(concat!("Error compiling regex for ", stringify!($const_name)))
+                        });
+                        Self::from(regex.clone())
+                    }
                 }
             )*
+
 
             pub fn from_prefix(prefix: &str) -> Option<Self> {
                 match prefix.to_lowercase().as_str() {
