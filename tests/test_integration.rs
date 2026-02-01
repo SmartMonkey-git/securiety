@@ -1,6 +1,4 @@
-use securiety::curie_parser::CurieParser;
-use securiety::traits::{CurieParsing, CurieValidation};
-use securiety::validators::regex_validator::CurieRegexValidator;
+use securiety::{CurieParser, CurieParsing, CurieRegexValidator, CurieValidation};
 
 #[test]
 fn test_integration_parsing() {

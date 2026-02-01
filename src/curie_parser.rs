@@ -2,6 +2,7 @@ use crate::curie::Curie;
 use crate::error::CurieParsingError;
 use crate::traits::{CurieParsing, CurieValidation};
 
+#[derive(Debug, Clone)]
 pub struct CurieParser<Validator: CurieValidation> {
     pub(crate) validator: Validator,
 }

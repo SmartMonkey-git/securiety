@@ -1,7 +1,7 @@
 use crate::error::InvalidRegexError;
 use crate::traits::CurieValidation;
 use regex::Regex;
-
+#[derive(Debug, Clone)]
 pub struct CurieRegexValidator {
     regex: Regex,
 }

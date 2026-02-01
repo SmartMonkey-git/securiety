@@ -1,5 +1,10 @@
 pub mod curie;
+pub use curie::Curie;
 pub mod curie_parser;
+pub use curie_parser::CurieParser;
 pub mod error;
+pub use error::*;
 pub mod traits;
+pub use traits::*;
 pub mod validators;
+pub use validators::regex_validator::CurieRegexValidator;
