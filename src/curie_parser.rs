@@ -2,12 +2,64 @@ use crate::curie::Curie;
 use crate::error::CurieParsingError;
 use crate::traits::{CurieParsing, CurieValidation};
 
+/// A parser for CURIE (Compact URI) strings that validates input using a configurable validator.
+///
+/// CURIEs are compact representations of URIs in the form `prefix:reference`, commonly used
+/// in semantic web applications and knowledge graphs.
+///
+/// # Type Parameters
+///
+/// * `Validator` - A type implementing [`CurieValidation`] used to validate CURIE strings
+///   before parsing.
+///
+/// # Examples
+///
+/// ```
+/// use securiety::{CurieParser, CurieParsing};
+///
+/// let parser = CurieParser::general();
+/// let curie = parser.parse("prefix:reference").unwrap();
+/// assert_eq!(curie.prefix(), "prefix");
+/// assert_eq!(curie.reference(), "reference");
+/// ```
 #[derive(Debug, Clone)]
 pub struct CurieParser<Validator: CurieValidation> {
     pub(crate) validator: Validator,
 }
 
 impl<Validator: CurieValidation> CurieParsing for CurieParser<Validator> {
+    /// Parses a CURIE string into a [`Curie`] instance.
+    ///
+    /// The parsing process:
+    /// 1. Validates the input string using the configured validator
+    /// 2. Splits the string on the colon (`:`) separator
+    /// 3. Returns a [`Curie`] with the prefix and reference components
+    ///
+    /// # Arguments
+    ///
+    /// * `curie` - A string slice containing the CURIE to parse (e.g., "prefix:reference")
+    ///
+    /// # Returns
+    ///
+    /// * `Ok(Curie)` - Successfully parsed CURIE
+    /// * `Err(CurieParsingError::InvalidCurie)` - The input failed validation
+    /// * `Err(CurieParsingError::UnparsableCurie)` - The input passed validation but
+    ///   couldn't be split into prefix and reference (no colon found)
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use securiety::{CurieParser, CurieParsing};
+    /// let parser = CurieParser::hp();
+    ///
+    /// // Valid CURIE
+    /// let result = parser.parse("HP:0000054");
+    /// assert!(result.is_ok());
+    ///
+    /// // Invalid CURIE (no colon)
+    /// let result = parser.parse("invalid");
+    /// assert!(result.is_err());
+    /// ```
     fn parse(&self, curie: &str) -> Result<Curie, CurieParsingError> {
         match self.validator.validate(curie) {
             true => {

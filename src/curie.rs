@@ -1,5 +1,25 @@
 use std::fmt::{Display, Formatter};
 
+/// A parsed CURIE (Compact URI) representation.
+///
+/// A CURIE consists of a prefix and a reference separated by a colon (`:`),
+/// providing a compact way to represent URIs. For example, `HP:0000054` where
+/// `HP` is the prefix and `0000054` is the reference.
+///
+/// This struct stores the CURIE as a single string internally for efficiency,
+/// tracking the prefix length to enable zero-copy access to both components.
+///
+/// # Examples
+///
+/// ```
+/// # use securiety::{Curie, CurieParser, CurieParsing};
+/// let parser = CurieParser::general();
+/// let curie = parser.parse("prefix:reference").unwrap();
+///
+/// assert_eq!(curie.prefix(), "prefix");
+/// assert_eq!(curie.reference(), "reference");
+/// assert_eq!(curie.to_string(), "prefix:reference");
+/// ```
 #[derive(Debug, Clone, PartialEq, Hash, Eq, PartialOrd, Ord)]
 pub struct Curie {
     inner: String,
@@ -7,6 +27,10 @@ pub struct Curie {
 }
 
 impl Curie {
+    /// Creates a new `Curie` from a prefix and reference.
+    ///
+    /// This is an internal constructor used by the parser. Users should typically
+    /// obtain `Curie` instances through a [`CurieParser`].
     pub(crate) fn new(prefix: &str, reference: &str) -> Curie {
         let inner = format!("{prefix}:{reference}");
         let prefix_len = prefix.len();
