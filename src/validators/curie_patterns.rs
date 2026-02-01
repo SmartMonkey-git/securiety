@@ -1,7 +1,7 @@
-use std::sync::OnceLock;
 use crate::curie_parser::CurieParser;
 use crate::validators::regex_validator::CurieRegexValidator;
 use paste::paste;
+use std::sync::OnceLock;
 
 macro_rules! define_curie_validators {
     ( $( $fn_name:ident, $const_name:ident => $pattern:literal ),* $(,)? ) => {
