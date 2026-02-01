@@ -27,7 +27,7 @@ securiety = "0.2.0"
    If you need to validate that a string is simply a well-formed CURIE (has a valid prefix and reference structure) without enforcing specific ontology patterns:
 
 ```Rust
-use curie_validator::curie_parser::CurieParser;
+use securiety::{CurieParser, CurieParsing};
 
 fn main() {
 // Create a general parser
@@ -45,7 +45,7 @@ let parser = CurieParser::general();
 2. Specific Ontology Validation
    You can use strict, pre-compiled regex validators for specific ontologies. This ensures that a GO term actually looks like a GO term (e.g., GO:0001234).
 ```Rust
-use curie_validator::curie_parser::CurieParser;
+use securiety::{CurieParser, CurieParsing};
 
 fn main() {
 // strict validator for Gene Ontology
@@ -63,9 +63,7 @@ let go_parser = CurieParser::go();
 3. Dynamic Prefix Lookup
    If you are processing data where the ontology prefix is determined at runtime, you can look up the validator dynamically:
 ```Rust
-
-use curie_validator::curie_parser::CurieParser;
-use curie_validator::validators::regex_validator::CurieRegexValidator;
+use securiety::{CurieParser, CurieParsing, CurieRegexValidator, CurieValidation};
 
 fn main() {
 let input_prefix = "mondo";
