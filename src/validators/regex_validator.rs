@@ -1,6 +1,29 @@
 use crate::error::InvalidRegexError;
 use crate::traits::CurieValidation;
 use regex::Regex;
+
+/// A CURIE validator that uses regular expressions to validate CURIE strings.
+///
+/// This validator allows flexible validation rules by accepting any regular expression
+/// pattern. It's useful when you need custom validation logic beyond simple format checks.
+///
+/// # Examples
+///
+/// ```
+/// use securiety::{CurieRegexValidator, CurieValidation};
+/// use regex::Regex;
+/// // Create a validator that requires lowercase prefixes
+/// let validator = CurieRegexValidator::general();
+///
+/// assert!(validator.validate("rdf:type"));
+/// ```
+///
+/// ```
+///  use securiety::{CurieRegexValidator, CurieValidation};
+/// // Create validator for specific resource
+/// let validator = CurieRegexValidator::hp();
+/// assert!(validator.validate("HP:0000054"));
+/// ```
 #[derive(Debug, Clone)]
 pub struct CurieRegexValidator {
     regex: Regex,
