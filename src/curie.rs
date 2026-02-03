@@ -11,7 +11,7 @@ use std::fmt::{Display, Formatter};
 ///
 /// # Examples
 ///
-/// ```Rust
+/// ```
 /// use securiety::{Curie, CurieParser, CurieParsing};
 /// let parser = CurieParser::general();
 /// let curie = parser.parse("prefix:reference").unwrap();
