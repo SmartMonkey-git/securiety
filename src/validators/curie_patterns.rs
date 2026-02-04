@@ -414,5 +414,6 @@ sio, SIO_PATTERN => "^SIO:\\d{6}$",
 mat, MAT_PATTERN => "^MAT:\\d{7}$",
 // Current Procedural Terminology
 cpt, CPT_PATTERN => "^CPT:\\d+$",
+    drugcentral, DRUGCENTRAL => "DrugCentral:\\d+$",
     general, GENERAL_PATTERN => r"^[a-zA-Z0-9_][a-zA-Z0-9\._-]*:[^\s]+$"
 }

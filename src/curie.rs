@@ -12,7 +12,7 @@ use std::fmt::{Display, Formatter};
 /// # Examples
 ///
 /// ```
-/// # use securiety::{Curie, CurieParser, CurieParsing};
+/// use securiety::{Curie, CurieParser, CurieParsing};
 /// let parser = CurieParser::general();
 /// let curie = parser.parse("prefix:reference").unwrap();
 ///
