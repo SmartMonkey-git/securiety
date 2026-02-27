@@ -23,7 +23,7 @@ use crate::traits::{CurieParsing, CurieValidation};
 /// assert_eq!(curie.reference(), "reference");
 /// ```
 #[derive(Debug, Clone)]
-pub struct CurieParser<Validator: CurieValidation> {
+pub struct CurieParser<Validator> {
     pub(crate) validator: Validator,
 }
 
